@@ -1,10 +1,15 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: serif, "Microsoft Yahei";
 }
 
-.task-list {
-  display: flex;
+body {
+  margin: 10px 20px 20px 20px;
+}
+
+.card-list {
+  display: flex; 
   height: 150px;
   width: 100%;
 }
@@ -18,8 +23,15 @@
   margin: 10px;
   padding: 10px 0;
   border-radius: 5px;
-  font-family: serif, "Microsoft Yahei";
   color: white;
+}
+
+.task-card:last-child {
+  margin-right: 0;
+}
+
+.task-card:first-child {
+  margin-left: 0;
 }
 
 .task-card .live-tag {
@@ -74,4 +86,32 @@
 
 .solved-task {
   background-color: #3b67a4;
+}
+
+.task-list h2 {
+  padding: 15px 0;
+}
+
+.task-list li {
+  list-style-type: none;
+  border-bottom: 1px solid #DCDEE3;
+  color: #333;
+  padding: 15px;
+  display: flex;
+}
+
+.list-attribute {
+  background-color: #EBECF0;
+}
+
+.task-list li span {
+  flex-grow: 1;
+}
+
+.task-list li span:nth-child(2) {
+  flex-grow: 4;
+}
+
+.task-list li span:nth-child(1) {
+  flex-grow: 2;
 }
