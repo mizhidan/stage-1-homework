@@ -4,6 +4,7 @@
   font-family: serif, "Microsoft Yahei";
 }
 
+
 body {
   margin: 10px 20px 20px 20px;
 }
@@ -114,4 +115,40 @@ body {
 
 .task-list li span:nth-child(1) {
   flex-grow: 2;
+}
+
+.task-content li {
+  padding: 10px 0;
+  line-height: 18px;
+  height: 33px;
+  font-size: 11px;
+}
+
+.project-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.project-list span:nth-child(2) {
+  padding-right: 11px;
+  top: 0;
+  transform: translate(0,0);
+}
+
+.project-list span {
+  position: relative;
+  top: 50%;
+  transform: translate(0,-25%);
+}
+
+.delete-btn {
+  background-color: #ee706d;
+  border-radius: 2px;
+  border: 0;
+  padding: 6px;
+  color: white;
+  outline: none;
+  transform: translate(0,-25%);
 }

@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css" />
     <link type="text/css" rel="stylesheet" href="./css/index.css" />
     <link type="text/css" rel="stylesheet" href="./iconfont/iconfont.css" />
   </head>
@@ -9,27 +10,27 @@
     <div class="card-list">
       <div class="task-card all-task">
         <h4>所有任务</h4>
-        <p>3,841</p>
+        <p class="task-number">3,841</p>
         <span class="iconfont icon-xiangmu"></span>
         <div class="live-tag">实时</div>
       </div>
       <div class="task-card unsolved-task">
         <h4>未解决</h4>
-        <p>2,305</p>
+        <p class="task-number">2,305</p>
         <span class="iconfont icon-weijiejue"></span>
         <p class="percent">60%</p>
         <div class="live-tag">实时</div>
       </div>
       <div class="task-card solving-task">
         <h4>处理中</h4>
-        <p>384</p>
+        <p class="task-number">384</p>
         <span class="iconfont icon-loudou"></span>
         <p class="percent">10%</p>
         <div class="live-tag">实时</div>
       </div>
       <div class="task-card solved-task">
         <h4>已解决</h4>
-        <p>1,152</p>
+        <p class="task-number">1,152</p>
         <span class="iconfont icon-yijiejue2"></span>
         <p class="percent">30%</p>
         <div class="live-tag">实时</div>
@@ -39,14 +40,15 @@
       <h2>项目列表</h2>
       <ul class="task-content">
         <li class="list-attribute">
-          <span>项目名称</span>
-          <span>项目描述</span>
-          <span>截止时间</span>
-          <span>状态</span>
-          <span>操作</span>
+          <span class="project-name">项目名称</span>
+          <span class="project-description">项目描述</span>
+          <span class="end-time">截止时间</span>
+          <span class="status">状态</span>
+          <span class="option">操作</span>
         </li>
       </ul>
     </div>
   </body>
+  <script type="text/javascript" src="./script/ajax.js"></script>
   <script type="text/javascript" src="./script/index.js"></script>
 </html>
