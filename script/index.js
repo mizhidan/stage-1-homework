@@ -107,17 +107,17 @@ function changeCardPercent(act, pending, closed) {
     percent[1].innerHTML = 0 + "%";
     percent[2].innerHTML = 0 + "%";
   } else {
-    if ((act / sum * 1000).toFixed(2) % 10 == 0) {
+    if ((act / sum * 10000).toFixed(2) % 10 == 0) {
       percent[0].innerHTML = Math.round((act / sum) * 100) + "%";
     } else {
       percent[0].innerHTML = ((act / sum) * 100).toFixed(2) + "%";
     }
-    if ((pending / sum * 1000).toFixed(2) % 10 == 0) {
+    if ((pending / sum * 10000).toFixed(2) % 10 == 0) {
       percent[1].innerHTML = Math.round((pending / sum) * 100) + "%";
     } else {
       percent[1].innerHTML = ((pending / sum) * 100).toFixed(2) + "%";
     } 
-    if ((closed / sum * 1000).toFixed(2) % 10 == 0) {
+    if ((closed / sum * 10000).toFixed(2) % 10 == 0) {
       percent[2].innerHTML = Math.round((closed / sum) * 100) + "%";
     } else {
       percent[2].innerHTML = ((closed / sum) * 100).toFixed(2) + "%";
