@@ -76,7 +76,6 @@ function changeCardNumber() {
   let activeNum = 0;
   let pendingNum = 0;
   let closedNum = 0;
-  let sum = activeNum + pendingNum + closedNum;
   for (let index = 1; index < status.length; ++index) {
     switch (status[index].innerHTML) {
       case "ACTIVE":
@@ -92,6 +91,7 @@ function changeCardNumber() {
         break;
     }
   }
+  let sum = activeNum + pendingNum + closedNum;
   cardNum[0].innerHTML = sum;
   cardNum[1].innerHTML = activeNum;
   cardNum[2].innerHTML = pendingNum;
@@ -107,9 +107,21 @@ function changeCardPercent(act, pending, closed) {
     percent[1].innerHTML = 0 + "%";
     percent[2].innerHTML = 0 + "%";
   } else {
-    percent[0].innerHTML = Math.round((act / sum) * 100) + "%";
-    percent[1].innerHTML = Math.round((pending / sum) * 100) + "%";
-    percent[2].innerHTML = Math.round((closed / sum) * 100) + "%";
+    if ((act / sum * 1000).toFixed(2) % 10 == 0) {
+      percent[0].innerHTML = Math.round((act / sum) * 100) + "%";
+    } else {
+      percent[0].innerHTML = ((act / sum) * 100).toFixed(2) + "%";
+    }
+    if ((pending / sum * 1000).toFixed(2) % 10 == 0) {
+      percent[1].innerHTML = Math.round((pending / sum) * 100) + "%";
+    } else {
+      percent[1].innerHTML = ((pending / sum) * 100).toFixed(2) + "%";
+    } 
+    if ((closed / sum * 1000).toFixed(2) % 10 == 0) {
+      percent[2].innerHTML = Math.round((closed / sum) * 100) + "%";
+    } else {
+      percent[2].innerHTML = ((closed / sum) * 100).toFixed(2) + "%";
+    } 
   }
 }
 
