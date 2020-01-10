@@ -26,7 +26,7 @@ function showContent(data) {
   for (let index = 0; index < data.length; ++index) {
     let taskRow = document.createElement("li");
     taskRow.setAttribute("class", "project-list");
-    taskRow.setAttribute("id",data[index].id);
+    taskRow.setAttribute("id", data[index].id);
     let taskContent = `<span class="project-name">${data[index].name}</span>
     <span class="project-description">${data[index].description}</span>
     <span class="end-time">${data[index].endTime}</span>
@@ -76,34 +76,41 @@ function changeCardNumber() {
   let activeNum = 0;
   let pendingNum = 0;
   let closedNum = 0;
+  let sum = activeNum + pendingNum + closedNum;
   for (let index = 1; index < status.length; ++index) {
     switch (status[index].innerHTML) {
       case "ACTIVE":
-      ++activeNum;
-      break;
-    case "PENDING":
-      ++pendingNum;
-      break;
-    case "CLOSED":
-      ++closedNum;
-      break;
-    default:
-      break;
+        ++activeNum;
+        break;
+      case "PENDING":
+        ++pendingNum;
+        break;
+      case "CLOSED":
+        ++closedNum;
+        break;
+      default:
+        break;
     }
   }
-  cardNum[0].innerHTML = activeNum + pendingNum + closedNum;
+  cardNum[0].innerHTML = sum;
   cardNum[1].innerHTML = activeNum;
   cardNum[2].innerHTML = pendingNum;
   cardNum[3].innerHTML = closedNum;
-  changeCardPercent(activeNum,pendingNum,closedNum);
+  changeCardPercent(activeNum, pendingNum, closedNum);
 }
 
-function changeCardPercent(act,pending,closed) {
+function changeCardPercent(act, pending, closed) {
   let sum = act + pending + closed;
-  let percent = document.getElementsByClassName('percent');
-  percent[0].innerHTML =  ((act / sum) * 100) + '%';
-  percent[1].innerHTML = ((pending / sum) * 100) + '%';
-  percent[2].innerHTML = ((closed / sum) * 100) + '%';
+  let percent = document.getElementsByClassName("percent");
+  if (sum == 0) {
+    percent[0].innerHTML = 0 + "%";
+    percent[1].innerHTML = 0 + "%";
+    percent[2].innerHTML = 0 + "%";
+  } else {
+    percent[0].innerHTML = Math.round((act / sum) * 100) + "%";
+    percent[1].innerHTML = Math.round((pending / sum) * 100) + "%";
+    percent[2].innerHTML = Math.round((closed / sum) * 100) + "%";
+  }
 }
 
 function checkDeleteProject(index) {
@@ -111,36 +118,36 @@ function checkDeleteProject(index) {
   let cover = document.getElementsByClassName("cover")[0];
   let guanbiIcon = document.getElementsByClassName("icon-guanbi")[0];
   let deleteBtn = document.getElementsByClassName("yes-btn")[0];
-  checkBox.style.visibility = 'visible';
-  cover.style.visibility = 'visible';
+  checkBox.style.visibility = "visible";
+  cover.style.visibility = "visible";
   guanbiIcon.addEventListener("click", function() {
-    checkBox.style.visibility = 'hidden';
-    cover.style.visibility = 'hidden';
-  })
-  deleteBtn.addEventListener("click",function(event) {
+    checkBox.style.visibility = "hidden";
+    cover.style.visibility = "hidden";
+  });
+  deleteBtn.addEventListener("click", function(event) {
     let options = {
-      url: API_ROOT + '/' + index,
+      url: API_ROOT + "/" + index,
       method: "DELETE",
       success: function(res) {
-          deleteProject(index);
-      }, 
+        deleteProject(index);
+      },
       fail: function(error) {
-              console.log('ERROR');
-          }
-  };
-  ajax(options);
+        console.log("ERROR");
+      }
+    };
+    ajax(options);
   });
 }
 
 function backToPage() {
   let checkBox = document.getElementsByClassName("delete-check")[0];
   let cover = document.getElementsByClassName("cover")[0];
-  checkBox.style.visibility = 'hidden';
-  cover.style.visibility = 'hidden';
+  checkBox.style.visibility = "hidden";
+  cover.style.visibility = "hidden";
 }
 
 function deleteProject(index) {
-  let row = document.getElementsByClassName('task-content');
+  let row = document.getElementsByClassName("task-content");
   row.removeChild(index);
 }
 
