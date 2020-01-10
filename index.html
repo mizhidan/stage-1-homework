@@ -7,6 +7,17 @@
     <link type="text/css" rel="stylesheet" href="./iconfont/iconfont.css" />
   </head>
   <body>
+    <div class="cover"></div>
+    <div class="delete-check">
+      <span class="iconfont icon-wenhao" id="wenhao"></span>
+      <span class="iconfont icon-guanbi" id="guanbi"></span>
+      <h4 class="alert-text">提示</h4>
+      <p class="alert-text">确认删除该项目吗？</p >
+      <div class="check-btn">
+        <button class="yes-btn">确认</button>
+        <button class="no-btn" onclick="backToPage()">取消</button>
+      </div>
+    </div>
     <div class="card-list">
       <div class="task-card all-task">
         <h4>所有任务</h4>

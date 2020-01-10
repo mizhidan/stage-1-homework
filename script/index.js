@@ -11,10 +11,10 @@ function getTaskInfo() {
     method: "GET",
     success: function(res) {
       showContent(res);
-    }, // 请求成功后调用此方法
+    },
     fail: function(error) {
       console.log("ERROR");
-    } // 请求失败或出错后调用此方法
+    }
   };
   ajax(options);
 }
@@ -26,16 +26,18 @@ function showContent(data) {
   for (let index = 0; index < data.length; ++index) {
     let taskRow = document.createElement("li");
     taskRow.setAttribute("class", "project-list");
+    taskRow.setAttribute("id",data[index].id);
     let taskContent = `<span class="project-name">${data[index].name}</span>
- <span class="project-description">${data[index].description}</span>
-  <span class="end-time">${data[index].endTime}</span>
- <span class="status">${data[index].status}</span>
- <span class="option"><button class="delete-btn">删除</button> </span>`;
+    <span class="project-description">${data[index].description}</span>
+    <span class="end-time">${data[index].endTime}</span>
+    <span class="status">${data[index].status}</span>
+    <span class="option"><button class="delete-btn" id="${data[index].id}" onclick=checkDeleteProject(${data[index].id})>删除</button> </span>`;
     taskRow.innerHTML = taskContent;
     newList.appendChild(taskRow);
     adjustWidth(index);
     changeStatusColor(index);
   }
+  changeCardNumber();
 }
 
 function adjustWidth(index) {
@@ -66,6 +68,80 @@ function changeStatusColor(index) {
     default:
       break;
   }
+}
+
+function changeCardNumber() {
+  let status = document.getElementsByClassName("status");
+  let cardNum = document.getElementsByClassName("task-number");
+  let activeNum = 0;
+  let pendingNum = 0;
+  let closedNum = 0;
+  for (let index = 1; index < status.length; ++index) {
+    switch (status[index].innerHTML) {
+      case "ACTIVE":
+      ++activeNum;
+      break;
+    case "PENDING":
+      ++pendingNum;
+      break;
+    case "CLOSED":
+      ++closedNum;
+      break;
+    default:
+      break;
+    }
+  }
+  cardNum[0].innerHTML = activeNum + pendingNum + closedNum;
+  cardNum[1].innerHTML = activeNum;
+  cardNum[2].innerHTML = pendingNum;
+  cardNum[3].innerHTML = closedNum;
+  changeCardPercent(activeNum,pendingNum,closedNum);
+}
+
+function changeCardPercent(act,pending,closed) {
+  let sum = act + pending + closed;
+  let percent = document.getElementsByClassName('percent');
+  percent[0].innerHTML =  ((act / sum) * 100) + '%';
+  percent[1].innerHTML = ((pending / sum) * 100) + '%';
+  percent[2].innerHTML = ((closed / sum) * 100) + '%';
+}
+
+function checkDeleteProject(index) {
+  let checkBox = document.getElementsByClassName("delete-check")[0];
+  let cover = document.getElementsByClassName("cover")[0];
+  let guanbiIcon = document.getElementsByClassName("icon-guanbi")[0];
+  let deleteBtn = document.getElementsByClassName("yes-btn")[0];
+  checkBox.style.visibility = 'visible';
+  cover.style.visibility = 'visible';
+  guanbiIcon.addEventListener("click", function() {
+    checkBox.style.visibility = 'hidden';
+    cover.style.visibility = 'hidden';
+  })
+  deleteBtn.addEventListener("click",function(event) {
+    let options = {
+      url: API_ROOT + '/' + index,
+      method: "DELETE",
+      success: function(res) {
+          deleteProject(index);
+      }, 
+      fail: function(error) {
+              console.log('ERROR');
+          }
+  };
+  ajax(options);
+  });
+}
+
+function backToPage() {
+  let checkBox = document.getElementsByClassName("delete-check")[0];
+  let cover = document.getElementsByClassName("cover")[0];
+  checkBox.style.visibility = 'hidden';
+  cover.style.visibility = 'hidden';
+}
+
+function deleteProject(index) {
+  let row = document.getElementsByClassName('task-content');
+  row.removeChild(index);
 }
 
 taskList();
