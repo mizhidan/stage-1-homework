@@ -124,6 +124,13 @@ body {
   font-size: 11px;
 }
 
+.task-content li:first-child {
+  padding: 10px 0;
+  line-height: 18px;
+  height: 18px;
+  font-size: 11px;
+}
+
 .project-description {
   display: -webkit-box;
   -webkit-box-orient: vertical;
